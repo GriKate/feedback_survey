@@ -1,6 +1,6 @@
 
 
-export const setNewRating = (num) => ({
+export const setRating = (num) => ({
     type: 'setRating',
     num
 });

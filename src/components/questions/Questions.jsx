@@ -42,35 +42,11 @@ const questionsText = [
 ]
 
 
-export const Questions = ({ setAllAnswers }) => {
-    // ? сохранять isSend state Redux ?
-    const [allDone, setAllDone] = useState(false);
-    const [answers, setAnswers] = useState([]);
-
-    const navigate = useNavigate();
-
-    // Redux -----------------------
-    // const state = store.getState();
-    const stateAnswers = useSelector((state) => state.data.questions);
+export const Questions = () => {
+    const answers = useSelector((state) => state.data.questions);
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        console.log('Q mount')
-        // после перезагрузки стр отображаются отмеченные ответы из стейта
-        setAnswers(stateAnswers);
-    }, [])
-
-    useEffect(() => {
-        console.log('answers ИЗМЕНИЛСЯ!');
-        
-        // проверка наличия ответов на все вопросы
-        // проверится и после перезагрузки стр, если ответили всё и перегрузили, д.б. доступна кнопка
-        const totalQuantity = questionsText.length;
-        const currentQuantity = answers.length;
-        if (totalQuantity === currentQuantity) setAllDone(true);
-
-        console.log(answers);
-    }, [answers])
+    const navigate = useNavigate();
 
     const setCurrentAnswer = (currentAnswer) => {
         const uniqueAnswers = answers.filter((el) => {
@@ -78,15 +54,10 @@ export const Questions = ({ setAllAnswers }) => {
             return el.questionID !== currentAnswer.questionID;
         })
         uniqueAnswers.push(currentAnswer);
-        // сохраняю массив ответов в стейт
-        setAnswers(uniqueAnswers);
-        // сохраняю массив ответов в Redux
         dispatch(setResponse(uniqueAnswers));
     }
 
-    const handleSetAnswers = (num) => {
-        // передаю все ответы в App
-        // setAllAnswers(answers);
+    const handleSetAnswers = () => {
         navigate("/finish");
     }
 
@@ -112,6 +83,9 @@ export const Questions = ({ setAllAnswers }) => {
             </li>
         )} 
         </ul>
-        <button disabled={!allDone} onClick={() => handleSetAnswers(answers)}>Отправить ответы</button>
+        <button 
+        disabled={!(answers.length === 6)} 
+        onClick={handleSetAnswers}
+        >Отправить ответы</button>
     </>
 }

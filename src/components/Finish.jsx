@@ -11,8 +11,8 @@ export const Finish = () => {
     const dispatch = useDispatch(); 
 
     useEffect(() => {
-        dispatch(setDone());
-        console.log(state);
+        data.questions.length === 6 && dispatch(setDone());
+        console.log(data);
     }, [])
     return <>
     <h1>finish</h1>
