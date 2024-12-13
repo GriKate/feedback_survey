@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { store } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
-import { setResponse } from "../../store/survey/actions";
+import { setResponse } from "../../store/survey/slice";
 
 const questionsText = [
     {

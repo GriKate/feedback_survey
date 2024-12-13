@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import { store } from "../../store";
-import { useDispatch, useSelector } from "react-redux";
-import { setRating } from "../../store/survey/actions.js";
+import { useDispatch } from "react-redux";
+import { setRating } from "../../store/survey/slice";
 
 
 export const Rating = () => {
