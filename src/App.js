@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import { Layout } from './components/layout/Layout';
 import { Rating } from './components/rating/Rating';
 import { Questions } from './components/questions/Questions';
-import { Finish } from './components/Finish';
-import { Done } from './components/Done';
+import { Finish } from './components/finish/Finish';
+import { Done } from './components/done/Done';
 import { Route, Routes, useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
 

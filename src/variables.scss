@@ -1,0 +1,66 @@
+$blue: #1F73F9;
+
+@mixin textParagraph {
+    font-family: Roboto;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+@mixin text14  {
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+@mixin text12  {
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+@mixin button14 {
+    height: 40px;
+    border: 1px solid $blue;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: transparent;
+    @include text14;
+    cursor: pointer;
+}
+
+@mixin button12 {
+    height: 40px;
+    border: 1px solid $blue;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: transparent;
+    @include text12;
+    cursor: pointer;
+}
+
+@mixin buttonSubmit {
+    width: 222px;
+    height: 44px;
+    border: none;
+    border-radius: 22px;
+    background-color: #00A1E7;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}

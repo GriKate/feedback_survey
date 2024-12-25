@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setResponse } from "../../store/survey/slice";
+import styles from "./Questions.module.scss";
+import { useEffect, useState } from "react";
 
 const questionsText = [
     {
@@ -41,17 +43,23 @@ const questionsText = [
 
 
 export const Questions = () => {
+    const [localAnswers, setLocalAnswers] = useState([]);
     const answers = useSelector((state) => state.data.questions);
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        setLocalAnswers(answers);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
     const setCurrentAnswer = (currentAnswer) => {
         const uniqueAnswers = answers.filter((el) => {
-            // в массив uniqueAnswers попадут только уникальные questionID
             return el.questionID !== currentAnswer.questionID;
         })
         uniqueAnswers.push(currentAnswer);
+        setLocalAnswers(uniqueAnswers);
         dispatch(setResponse(uniqueAnswers));
     }
 
@@ -60,30 +68,53 @@ export const Questions = () => {
     }
 
     return <>
-        <p>Пожалуйста, ответьте на дополнительные вопросы.</p>
-        <ul>  
-        {questionsText.map((question) => 
-            <li key={question.id}>
-                <p>{question.id}</p>
-                <p>{question.text}</p>
-                <div>
-                    {Object.entries(question.answers).map((answ) => 
-                        <button key={answ[0]} onClick={() => setCurrentAnswer(
-                            {
-                                questionID: question.id, 
-                                responseID: answ[0]
-                            },
-                        )}>
-                            {answ[1]}
-                        </button>
-                    )}
-                </div>
-            </li>
-        )} 
-        </ul>
-        <button 
+    <main className={styles.mainContainer}>
+        <img src="/img/2_people.png" className={styles.picture} alt="people" />
+        <p className={styles.text}>Пожалуйста, ответьте на дополнительные вопросы.</p>
+        <div className={styles.questions}>
+            <ul>
+            {questionsText.map((question) => 
+                <li className={styles.question} key={question.id}>
+                    <p className={styles.questionText}>{question.id}. {question.text}</p>
+
+                    <ul className={styles.answers}>
+                        {Object.entries(question.answers).map((answ) => 
+                            <li className={styles.answer} key={answ[0]}>
+                                {localAnswers.find(el => el.questionID === question.id && el.responseID === answ[0]) 
+                                ? 
+                                <button 
+                                className={`${styles.btn} ${styles.active}`} 
+                                onClick={() => setCurrentAnswer(
+                                    {
+                                        questionID: question.id, 
+                                        responseID: answ[0]
+                                    }
+                                )}>
+                                    {answ[1]}
+                                </button> 
+                                : 
+                                <button 
+                                className={styles.btn} 
+                                onClick={() => setCurrentAnswer(
+                                    {
+                                        questionID: question.id, 
+                                        responseID: answ[0]
+                                    }
+                                )}>
+                                    {answ[1]}
+                                </button>
+                                }
+                            </li> 
+                        )}
+                    </ul>
+                </li>
+            )} 
+            </ul>
+        </div>
+        <button className={styles.submitBtn} 
         disabled={!(answers.length === 6)} 
         onClick={handleSetAnswers}
         >Отправить ответы</button>
+    </main>   
     </>
 }

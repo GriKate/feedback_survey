@@ -1,0 +1,76 @@
+@import '../../variables.scss';
+
+.mainContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+}
+.picture {
+    position: absolute;
+    top: 100px;
+    right: 20px;
+    z-index: -10;
+}
+.text {
+    margin: 16px 0 28px;
+    @include textParagraph;
+}
+.questions {
+    width: 100%;
+}
+.question {
+    margin-bottom: 28px;
+    &:first-child .answers {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    &:first-child .btn {
+        width: 200px;
+        border-radius: 25px;
+        padding: 0 16px;
+        text-align: start;
+        @include button12;
+        &:hover {
+            background-color: $blue;
+        }
+        &.active {
+            background-color: $blue;
+        }
+    }
+}
+.questionText {
+    @include text12;
+}
+.answers {
+    display: flex;
+    padding: 0;
+    // margin-top: 8px;
+}
+
+.btn {
+    width: 40px;
+    @include button14;
+    margin-top: 8px;
+    margin-right: 8px;
+    transition: background-color .3s;
+    &:hover {
+        background-color: $blue;
+    }
+    &:active {
+        box-shadow: 0 0 3px #bbb;
+    }
+}
+.active {
+    background-color: $blue;
+}
+.submitBtn {
+    @include buttonSubmit;
+    &:hover {
+        box-shadow: 0 0 3px #bbb;
+    }
+    &:disabled {
+        background-color: grey;
+    }
+}
