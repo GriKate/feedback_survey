@@ -72,7 +72,7 @@ export const Questions = () => {
         <img src="/img/2_people.png" className={styles.picture} alt="people" />
         <p className={styles.text}>Пожалуйста, ответьте на дополнительные вопросы.</p>
         <div className={styles.questions}>
-            <ul>
+            <ul className={styles.questionsList}>
             {questionsText.map((question) => 
                 <li className={styles.question} key={question.id}>
                     <p className={styles.questionText}>{question.id}. {question.text}</p>
