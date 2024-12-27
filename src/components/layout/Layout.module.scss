@@ -1,6 +1,9 @@
 .container {
     width: 1054px;
     padding-bottom: 102px;
+    @media screen and (max-width:1054px) {
+        width: 100%;
+    }
 }
 .header {
     width: 100%;
@@ -8,9 +11,16 @@
 .top {
     height: 96px;
     line-height: 96px;
+    @media screen and (max-width:1054px) {
+        height: 80px;
+        line-height: 80px;
+    }
 }
 .logo {
     vertical-align: middle;
+    @media screen and (max-width:1054px) {
+        margin-left: 20px;
+    }
 }
 .gradientLine {
     width: 100%;

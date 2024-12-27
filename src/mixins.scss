@@ -1,0 +1,67 @@
+
+@mixin header($size) {
+    font-family: Roboto;
+    font-size: $size;
+    font-weight: 700;
+    line-height: 35px;
+    text-align: center;
+}
+
+@mixin textParagraph($align) {
+    font-family: Roboto;
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 22px;
+    text-align: $align;
+}
+
+@mixin text($size, $align)  {
+    font-family: Roboto;
+    font-size: $size;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: $align;
+}
+
+@mixin textMobile12  {
+    font-family: Roboto;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 20px;
+    text-align: center;
+}
+
+@mixin button14 {
+    height: 40px;
+    border: 1px solid $blue;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: transparent;
+    @include text(14px, center);
+    cursor: pointer;
+}
+
+@mixin button12 {
+    height: 40px;
+    border: 1px solid $blue;
+    border-radius: 20px;
+    color: #ffffff;
+    background-color: transparent;
+    @include text(12px, left);
+    cursor: pointer;
+}
+
+@mixin buttonSubmit {
+    width: 222px;
+    height: 44px;
+    border: none;
+    border-radius: 22px;
+    background-color: $lightblue;
+    color: #fff;
+    cursor: pointer;
+    transition: all .3s;
+    font-family: Roboto;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center;
+}
