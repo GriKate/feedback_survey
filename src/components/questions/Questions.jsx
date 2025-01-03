@@ -63,7 +63,8 @@ export const Questions = () => {
         dispatch(setResponse(uniqueAnswers));
     }
 
-    const handleSetAnswers = () => {
+    const handleSetAnswers = (e) => {
+        e.preventDefault();
         navigate("/finish");
     }
 
@@ -71,7 +72,7 @@ export const Questions = () => {
     <main className={styles.mainContainer}>
         <img src="/img/2_people.png" className={styles.picture} alt="people" />
         <p className={styles.text}>Пожалуйста, ответьте на дополнительные вопросы.</p>
-        <div className={styles.questions}>
+        <form className={styles.questions} onSubmit={handleSetAnswers}>
             <ul className={styles.questionsList}>
             {questionsText.map((question) => 
                 <li className={styles.question} key={question.id}>
@@ -83,6 +84,7 @@ export const Questions = () => {
                                 {localAnswers.find(el => el.questionID === question.id && el.responseID === answ[0]) 
                                 ? 
                                 <button 
+                                type="button" 
                                 className={`${styles.btn} ${styles.active}`} 
                                 onClick={() => setCurrentAnswer(
                                     {
@@ -94,6 +96,7 @@ export const Questions = () => {
                                 </button> 
                                 : 
                                 <button 
+                                type="button" 
                                 className={styles.btn} 
                                 onClick={() => setCurrentAnswer(
                                     {
@@ -110,11 +113,14 @@ export const Questions = () => {
                 </li>
             )} 
             </ul>
-        </div>
-        <button className={styles.submitBtn} 
+            <button type="submit" className={styles.submitBtn} 
+                disabled={!(answers.length === 6)} 
+                >Отправить ответы</button>
+        </form>
+        {/* <button className={styles.submitBtn} 
         disabled={!(answers.length === 6)} 
         onClick={handleSetAnswers}
-        >Отправить ответы</button>
+        >Отправить ответы</button> */}
     </main>   
     </>
 }

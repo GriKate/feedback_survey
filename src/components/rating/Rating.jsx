@@ -30,7 +30,7 @@ export const Rating = () => {
             <img src="/img/1_people.png" className={styles.people} alt="people" />
         </div>
 
-        <div className={styles.content}>
+        <form className={styles.content} onSubmit={(e) => {e.preventDefault()}}>
             <h1 className={styles.header}>Уважаемый клиент!</h1>
             <p className={styles.text}>Запрос закрыт. Пожалуйста, оцените качество предоставленного сервиса по данному обращению, используя шкалу от 0 до 9, где 0 является «Хуже некуда» и 9 — «Отлично».</p>
             <div className={styles.ratingContainer}>
@@ -38,7 +38,7 @@ export const Rating = () => {
                     {setNums().map((num, idx) => 
                         num !== null ?
                         <li className={styles.num} key={idx}>
-                            <button type="button" className={styles.btn} onClick={() => {handleSetRating(num)}}>{num}</button>
+                            <button type="submit" className={styles.btn} onClick={() => {handleSetRating(num)}}>{num}</button>
                         </li>
                         : null
                     )}
@@ -48,7 +48,7 @@ export const Rating = () => {
                     <span className={styles.caption}>Отлично</span>
                 </div>
             </div>
-        </div>
+        </form>
     </main>
     </>
 } 
