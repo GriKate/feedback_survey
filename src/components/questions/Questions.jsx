@@ -2,7 +2,6 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setResponse } from "../../store/survey/slice";
 import styles from "./Questions.module.scss";
-import { useEffect, useState } from "react";
 
 const questionsText = [
     {
@@ -43,27 +42,21 @@ const questionsText = [
 
 
 export const Questions = () => {
-    const [localAnswers, setLocalAnswers] = useState([]);
     const answers = useSelector((state) => state.data.questions);
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
-    useEffect(() => {
-        setLocalAnswers(answers);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
-
     const setCurrentAnswer = (currentAnswer) => {
         const uniqueAnswers = answers.filter((el) => {
             return el.questionID !== currentAnswer.questionID;
         })
-        uniqueAnswers.push(currentAnswer);
-        setLocalAnswers(uniqueAnswers);
+        uniqueAnswers.push(currentAnswer); 
         dispatch(setResponse(uniqueAnswers));
     }
 
-    const handleSetAnswers = () => {
+    const handleSetAnswers = (e) => {
+        e.preventDefault();
         navigate("/finish");
     }
 
@@ -71,7 +64,7 @@ export const Questions = () => {
     <main className={styles.mainContainer}>
         <img src="/img/2_people.png" className={styles.picture} alt="people" />
         <p className={styles.text}>Пожалуйста, ответьте на дополнительные вопросы.</p>
-        <div className={styles.questions}>
+        <form className={styles.questions} onSubmit={handleSetAnswers}>
             <ul className={styles.questionsList}>
             {questionsText.map((question) => 
                 <li className={styles.question} key={question.id}>
@@ -80,9 +73,10 @@ export const Questions = () => {
                     <ul className={styles.answers}>
                         {Object.entries(question.answers).map((answ) => 
                             <li className={styles.answer} key={answ[0]}>
-                                {localAnswers.find(el => el.questionID === question.id && el.responseID === answ[0]) 
+                                {answers.find(el => el.questionID === question.id && el.responseID === answ[0])
                                 ? 
                                 <button 
+                                type="button" 
                                 className={`${styles.btn} ${styles.active}`} 
                                 onClick={() => setCurrentAnswer(
                                     {
@@ -94,6 +88,7 @@ export const Questions = () => {
                                 </button> 
                                 : 
                                 <button 
+                                type="button" 
                                 className={styles.btn} 
                                 onClick={() => setCurrentAnswer(
                                     {
@@ -110,11 +105,10 @@ export const Questions = () => {
                 </li>
             )} 
             </ul>
-        </div>
-        <button className={styles.submitBtn} 
-        disabled={!(answers.length === 6)} 
-        onClick={handleSetAnswers}
-        >Отправить ответы</button>
+            <button type="submit" className={styles.submitBtn} 
+                disabled={!(answers.length === 6)} 
+                >Отправить ответы</button>
+        </form>
     </main>   
     </>
 }
