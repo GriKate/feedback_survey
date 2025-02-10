@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import './App.scss';
 import { Layout } from './components/layout/Layout';
 import { Rating } from './components/rating/Rating';
@@ -7,11 +7,11 @@ import { Finish } from './components/finish/Finish';
 import { Done } from './components/done/Done';
 import { Route, Routes, useNavigate } from 'react-router';
 import { useSelector } from 'react-redux';
+import { State } from './types';
 
-
-export const App = () => {
-  const isDone = useSelector((state) => state.isDone);
-  const data = useSelector((state) => state.data);
+export const App: FC = () => {
+  const isDone = useSelector((state: State) => state.isDone);
+  const data = useSelector((state: State) => state.data);
 
   const navigate = useNavigate();
 

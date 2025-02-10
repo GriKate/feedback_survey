@@ -2,6 +2,8 @@ import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setResponse } from "../../store/survey/slice";
 import styles from "./Questions.module.scss";
+import { FC } from "react";
+import { State } from "../../types";
 
 const questionsText = [
     {
@@ -40,22 +42,26 @@ const questionsText = [
     },
 ]
 
+interface QuestionAnswer {
+    questionID: number; 
+    responseID: string;
+}
 
-export const Questions = () => {
-    const answers = useSelector((state) => state.data.questions);
+export const Questions: FC = () => {
+    const answers = useSelector((state: State) => state.data.questions);
     const dispatch = useDispatch();
 
     const navigate = useNavigate();
 
-    const setCurrentAnswer = (currentAnswer) => {
-        const uniqueAnswers = answers.filter((el) => {
+    const setCurrentAnswer = (currentAnswer: QuestionAnswer) => {
+        const uniqueAnswers = answers.filter((el: QuestionAnswer) => {
             return el.questionID !== currentAnswer.questionID;
         })
         uniqueAnswers.push(currentAnswer); 
         dispatch(setResponse(uniqueAnswers));
     }
 
-    const handleSetAnswers = (e) => {
+    const handleSetAnswers = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         navigate("/finish");
     }
@@ -68,12 +74,12 @@ export const Questions = () => {
             <ul className={styles.questionsList}>
             {questionsText.map((question) => 
                 <li className={styles.question} key={question.id}>
-                    <p className={styles.questionText}>{question.id}. {question.text}</p>
+                    <p className={styles.questionText}>{question.id}.{question.text}</p>
 
                     <ul className={styles.answers}>
                         {Object.entries(question.answers).map((answ) => 
                             <li className={styles.answer} key={answ[0]}>
-                                {answers.find(el => el.questionID === question.id && el.responseID === answ[0])
+                                {answers.find((el: QuestionAnswer) => el.questionID === question.id && el.responseID === answ[0])
                                 ? 
                                 <button 
                                 type="button" 

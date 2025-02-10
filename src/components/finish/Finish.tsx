@@ -2,17 +2,18 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setDone } from "../../store/survey/slice";
 import styles from "./Finish.module.scss";
+import { State } from "../../types";
 
 
 export const Finish = () => {
-    const data = useSelector((state) => state.data);
-    const isDone = useSelector((state) => state.isDone);
+    const data = useSelector((state: State) => state.data);
     const dispatch = useDispatch(); 
 
     useEffect(() => {
-        data.questions.length === 6 && dispatch(setDone());
+        if(data.questions.length === 6) {
+            dispatch(setDone());
+        }
         console.log(data);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
     return <>
     <main className={styles.mainContainer}>
