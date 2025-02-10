@@ -12,14 +12,14 @@ export const Rating = () => {
     const dispatch = useDispatch();
 
     const setNums = () => {
-        let nums = [];
+        const nums = [];
         for(let i = minRating; i <= maxRating; i++) {
             nums.push(i);
         }
         return nums;
     }
 
-    const handleSetRating = (num) => {
+    const handleSetRating = (num: number) => {
         dispatch(setRating(num));
         navigate("/questions");
     }
@@ -32,7 +32,7 @@ export const Rating = () => {
 
         <form className={styles.content} onSubmit={(e) => {e.preventDefault()}}>
             <h1 className={styles.header}>Уважаемый клиент!</h1>
-            <p className={styles.text}>Запрос закрыт. Пожалуйста, оцените качество предоставленного сервиса по данному обращению, используя шкалу от 0 до 9, где 0 является «Хуже некуда» и 9 — «Отлично».</p>
+            <p className={styles.text}>Запрос закрыт. Пожалуйста, оцените качество предоставленного сервиса по данному обращению, используя шкалу от 0 до 9, где 0 является «Хуже некуда» и 9 — «Отлично».</p>
             <div className={styles.ratingContainer}>
                 <ul className={styles.rating}>
                     {setNums().map((num, idx) => 
