@@ -4,6 +4,7 @@ import { setResponse } from "../../store/survey/slice";
 import styles from "./Questions.module.scss";
 import { FC } from "react";
 import { State } from "../../types";
+import cn from "classnames";
 
 const questionsText = [
     {
@@ -74,28 +75,17 @@ export const Questions: FC = () => {
             <ul className={styles.questionsList}>
             {questionsText.map((question) => 
                 <li className={styles.question} key={question.id}>
-                    <p className={styles.questionText}>{question.id}.{question.text}</p>
+                    <p className={styles.questionText}>{question.id}. {question.text}</p>
 
                     <ul className={styles.answers}>
                         {Object.entries(question.answers).map((answ) => 
                             <li className={styles.answer} key={answ[0]}>
-                                {answers.find((el: QuestionAnswer) => el.questionID === question.id && el.responseID === answ[0])
-                                ? 
                                 <button 
                                 type="button" 
-                                className={`${styles.btn} ${styles.active}`} 
-                                onClick={() => setCurrentAnswer(
-                                    {
-                                        questionID: question.id, 
-                                        responseID: answ[0]
-                                    }
-                                )}>
-                                    {answ[1]}
-                                </button> 
-                                : 
-                                <button 
-                                type="button" 
-                                className={styles.btn} 
+                                className={cn({
+                                    [styles.btn]: true, 
+                                    [styles.active]: answers.find((el: QuestionAnswer) => el.questionID === question.id && el.responseID === answ[0])
+                                })} 
                                 onClick={() => setCurrentAnswer(
                                     {
                                         questionID: question.id, 
@@ -104,7 +94,6 @@ export const Questions: FC = () => {
                                 )}>
                                     {answ[1]}
                                 </button>
-                                }
                             </li> 
                         )}
                     </ul>
