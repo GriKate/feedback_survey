@@ -30,7 +30,7 @@ export const Rating = () => {
             <img src="/img/1_people.png" className={styles.people} alt="people" />
         </div>
 
-        <form className={styles.content} onSubmit={(e) => {e.preventDefault()}}>
+        <div className={styles.content}>
             <h1 className={styles.header}>Уважаемый клиент!</h1>
             <p className={styles.text}>Запрос закрыт. Пожалуйста, оцените качество предоставленного сервиса по данному обращению, используя шкалу от 0 до 9, где 0 является «Хуже некуда» и 9 — «Отлично».</p>
             <div className={styles.ratingContainer}>
@@ -48,7 +48,7 @@ export const Rating = () => {
                     <span className={styles.caption}>Отлично</span>
                 </div>
             </div>
-        </form>
+        </div>
     </main>
     </>
 } 
