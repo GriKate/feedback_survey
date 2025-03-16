@@ -1,3 +1,4 @@
+@use './variables.scss';
 
 @mixin header($size) {
     font-family: Roboto;
@@ -33,7 +34,7 @@
 
 @mixin button14 {
     height: 40px;
-    border: 1px solid $blue;
+    border: 1px solid variables.$blue;
     border-radius: 20px;
     color: #ffffff;
     background-color: transparent;
@@ -43,7 +44,7 @@
 
 @mixin button12 {
     height: 40px;
-    border: 1px solid $blue;
+    border: 1px solid variables.$blue;
     border-radius: 20px;
     color: #ffffff;
     background-color: transparent;
@@ -56,7 +57,7 @@
     height: 44px;
     border: none;
     border-radius: 22px;
-    background-color: $lightblue;
+    background-color: variables.$lightblue;
     color: #fff;
     cursor: pointer;
     transition: all .3s;
