@@ -1,5 +1,5 @@
-@import '../../variables.scss';
-@import '../../mixins.scss';
+@use '../../variables.scss';
+@use '../../mixins.scss';
 
 .mainContainer {
     width: 100%;
@@ -28,15 +28,16 @@
 }
 .text {
     margin: 16px 0 28px;
-    @include textParagraph(center);
+    @include mixins.textParagraph(center);
     @media screen and (max-width:820px) {
-        @include textParagraph(left);
+        @include mixins.textParagraph(left);
     }
 }
 .questions {
     width: 100%;
 }
 .questionsList {
+    margin: 0;
     padding: 0;
 }
 .question {
@@ -51,17 +52,18 @@
         border-radius: 25px;
         padding: 0 16px;
         text-align: start;
-        @include button12;
+        @include mixins.button12;
         &:hover {
-            background-color: $blue;
+            background-color: variables.$blue;
         }
         &.active {
-            background-color: $blue;
+            background-color: variables.$blue;
         }
     }
 }
 .questionText {
-    @include text(12px, left);
+    margin: 0;
+    @include mixins.text(12px, left);
 }
 .answers {
     display: flex;
@@ -76,22 +78,22 @@
 }
 .btn {
     width: 40px;
-    @include button14;
+    @include mixins.button14;
     margin-top: 8px;
     margin-right: 8px;
     transition: background-color .3s;
     &:hover {
-        background-color: $blue;
+        background-color: variables.$blue;
     }
     &:active {
         box-shadow: 0 0 3px #bbb;
     }
 }
 .active {
-    background-color: $blue;
+    background-color: variables.$blue;
 }
 .submitBtn {
-    @include buttonSubmit;
+    @include mixins.buttonSubmit;
     &:hover {
         box-shadow: 0 0 3px #bbb;
     }

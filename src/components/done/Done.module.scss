@@ -1,5 +1,5 @@
-@import '../../variables.scss';
-@import '../../mixins.scss';
+@use '../../variables.scss';
+@use '../../mixins.scss';
 
 .mainContainer {
     width: 100%;
@@ -34,15 +34,15 @@
 }
 .header {
     margin: 0 0 28px;
-    @include header(30px);
+    @include mixins.header(30px);
     @media screen and (max-width:820px) {
         margin-bottom: 14px;
-        @include header(22px);
+        @include mixins.header(22px);
     }
 }
 .text {
     margin: 0 0 28px;
-    @include textParagraph(center);
+    @include mixins.textParagraph(center);
     @media screen and (max-width:820px) {
         margin: 0 0 14px;
     }
@@ -54,9 +54,9 @@
     flex-wrap: wrap;
 }
 .submitBtn {
-    @include buttonSubmit;
+    @include mixins.buttonSubmit;
     display: block;
-    line-height: 44px;
+    line-height: 45px;
     text-decoration: none;
     &:hover {
         box-shadow: 0 0 3px #bbb;
